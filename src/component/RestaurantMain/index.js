@@ -15,7 +15,6 @@ import category7 from '../../static/images/category7.svg'
 
 import styles from "./restaurantMain.module.css"
 
-
 function RestaurantMain(props) {
 
     return (
@@ -33,14 +32,28 @@ function RestaurantMain(props) {
                 </div>
             </Carousel>
             {/* <div className={styles.test}> */}
-            <div>
-                <img src={category1} />
-                <img src={category2} />
-                <img src={category3} />
-                <img src={category4} />
-                <img src={category5} />
-                <img src={category6} />
-                <img src={category7} />
+            <div className={styles.categoryWrapper}>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category1} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category2} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category3} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category4} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category5} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category6} />
+                </div>
+                <div className={styles.categoryIconContainer}>
+                    <img className={styles.categoryIcon} src={category7} />
+                </div>
             </div>
             {/* </div> */}
         </div>

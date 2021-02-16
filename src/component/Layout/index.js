@@ -8,7 +8,7 @@ function Header(props) {
 
     return (
         <div className={styles.mainContainer}>
-            <Layout className="header3">
+            <Layout className={styles.layoutContainer}>
                 <div>
                     Header
             </div>
