@@ -1,0 +1,33 @@
+.sliderContent {
+    height: 360px;
+    color: #fff;
+    width: 100%;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+}
+
+.test span{
+    margin-right: 20px;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.test{
+    padding: 0 20px;
+    margin-top: 100px;
+    overflow-x: scroll;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .test {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }
