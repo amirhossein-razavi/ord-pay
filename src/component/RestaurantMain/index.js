@@ -31,7 +31,6 @@ function RestaurantMain(props) {
                     <img className={styles.sliderContent} src={slider3} />
                 </div>
             </Carousel>
-            {/* <div className={styles.test}> */}
             <div className={styles.categoryWrapper}>
                 <div className={styles.categoryIconContainer}>
                     <img className={styles.categoryIcon} src={category1} />
@@ -55,7 +54,6 @@ function RestaurantMain(props) {
                     <img className={styles.categoryIcon} src={category7} />
                 </div>
             </div>
-            {/* </div> */}
         </div>
     );
 }
