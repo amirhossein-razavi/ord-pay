@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Badge } from 'antd'
-import { ShoppingOutlined ,MenuOutlined} from '@ant-design/icons';
+import { ShoppingOutlined, MenuOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
 
 import styles from "./layout.module.css"
 
@@ -12,8 +13,8 @@ function Header(props) {
             <Layout className={styles.layoutContainer}>
                 <div className={styles.headerWrapper}>
                     <MenuOutlined className={styles.menuIcon} />
-                    <Badge count={localStorage.getItem("basketCount")}>
-                        <ShoppingOutlined className={styles.basketIcon}/>
+                    <Badge count={props.basket.basketCount}>
+                        <ShoppingOutlined className={styles.basketIcon} />
                     </Badge>
                 </div>
                 <Content>
@@ -24,4 +25,8 @@ function Header(props) {
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+    basket: state.basket
+});
+
+export default connect(mapStateToProps, {})(Header);

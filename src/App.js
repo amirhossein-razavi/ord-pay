@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ConfigProvider } from 'antd';
+import { Provider } from 'react-redux';
 
+import store from './redux/store';
 import { setItem, getItem } from './globalFunctions/asyncLocalStorage';
 import TopHeader from "./component/Layout";
 import Page404 from "./component/Page404";
@@ -24,34 +26,36 @@ function App() {
   }
 
   return (
-    <ConfigProvider direction="rtl">
-      <Router>
-        <Switch>
-          <RouteWithLayout
-            path="/"
-            exact
-            component={Home}
-            layout={TopHeader}
-          />
-          <RouteWithLayout
-            layout={TopHeader}
-            path="/about-us"
-            component={AboutUs}
-          />
-          <RouteWithLayout
-            layout={TopHeader}
-            path="/menu/:restaurantName"
-            component={RestaurantMain}
-          />
-          <RouteWithLayout
-            layout={TopHeader}
-            path="/food/:food"
-            component={SingleFood}
-          />
-          <RouteWithLayout component={Page404} layout={TopHeader} />
-        </Switch>
-      </Router>
-    </ConfigProvider>
+    <Provider store={store}>
+      <ConfigProvider direction="rtl">
+        <Router>
+          <Switch>
+            <RouteWithLayout
+              path="/"
+              exact
+              component={Home}
+              layout={TopHeader}
+            />
+            <RouteWithLayout
+              layout={TopHeader}
+              path="/about-us"
+              component={AboutUs}
+            />
+            <RouteWithLayout
+              layout={TopHeader}
+              path="/menu/:restaurantName"
+              component={RestaurantMain}
+            />
+            <RouteWithLayout
+              layout={TopHeader}
+              path="/food/:food"
+              component={SingleFood}
+            />
+            <RouteWithLayout component={Page404} layout={TopHeader} />
+          </Switch>
+        </Router>
+      </ConfigProvider>
+    </Provider>
   );
 }
 

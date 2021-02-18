@@ -1,10 +1,7 @@
-import React, { useDebugValue } from 'react';
-import { Carousel, Card, Button } from 'antd';
+import React from 'react';
+import { Card, Button } from 'antd';
 import { useHistory } from 'react-router-dom'
-
-import slider1 from '../../static/images/slider1.jpg'
-import slider2 from '../../static/images/slider2.jpg'
-import slider3 from '../../static/images/slider3.jpg'
+import { connect } from 'react-redux';
 
 import category1 from '../../static/images/category1.svg'
 import category2 from '../../static/images/category2.svg'
@@ -15,17 +12,25 @@ import category6 from '../../static/images/category6.svg'
 import category7 from '../../static/images/category7.svg'
 
 import pizza from '../../static/images/pizza.png'
-import sandvich from '../../static/images/sandvich.png'
+import sandvich from '../../static/images/sandvich.png';
+
+import { onAddBasketCount } from '../../redux/actions/basketActions';
+import { addBasketCount } from '../../globalFunctions/index'
 
 import styles from "./restaurantMain.module.css"
 
 function RestaurantMain(props) {
 
     const { Meta } = Card;
-    const  history  = useHistory();
+    const history = useHistory();
 
     const toSingleFood = (prop) => {
         history.push({ pathname: `../../food/${prop}` })
+    }
+
+    const toAddBasketCount = () => {
+        props.onAddBasketCount();
+        addBasketCount();
     }
 
     return (
@@ -59,59 +64,92 @@ function RestaurantMain(props) {
                 </div>
             </div>
             <div className={styles.foodsLists}>
-                <div className={styles.foodCartWrapper} onClick={() => toSingleFood("پیتزا")}>
+                <div className={styles.foodCartWrapper}>
                     <Card
+                        onClick={() => toSingleFood("پیتزا")}
                         hoverable
                         style={{ width: "100%" }}
-                        cover={<img alt="example" src={pizza} />}
+                        cover={<img alt="example" width={200} height={100} src={pizza} />}
                     >
-                        <Meta title="پیتزا" description="10 هزار تومن" />
-                        <Button className={styles.addButton} type="primary">
-                            +
-                        </Button>
+                        <Meta style={{ width: "100%" }} title="پیتزا" description="10 هزار تومن" />
                     </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
                 </div>
-                <div className={styles.foodCartWrapper} onClick={() => toSingleFood("ساندویچ")}>
+                <div className={styles.foodCartWrapper}>
                     <Card
+                        onClick={() => toSingleFood("ساندویچ")}
                         hoverable
                         style={{ width: "100%" }}
-                        cover={<img alt="example" src={sandvich} />}
+                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
                     >
                         <Meta title="ساندویچ" description="10 هزار تومن" />
-                        <Button className={styles.addButton} type="primary">
-                            +
-                        </Button>
                     </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
                 </div>
             </div>
             <div className={styles.foodsLists}>
-                <div className={styles.foodCartWrapper} onClick={() => toSingleFood("ساندویچ")} style={{ marginTop: '-40px' }} >
+                <div className={styles.foodCartWrapper} >
                     <Card
+                        onClick={() => toSingleFood("ساندویچ")}
                         hoverable
                         style={{ width: "100%" }}
-                        cover={<img alt="example" src={sandvich} />}
+                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
                     >
                         <Meta title="ساندویچ" description="10 هزار تومن" />
-                        <Button className={styles.addButton} type="primary">
-                            +
-                        </Button>
                     </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
                 </div>
-                <div className={styles.foodCartWrapper} onClick={() => toSingleFood("پیتزا")}>
+                <div className={styles.foodCartWrapper}>
                     <Card
+                        onClick={() => toSingleFood("پیتزا")}
                         hoverable
                         style={{ width: "100%" }}
-                        cover={<img alt="example" src={pizza} />}
+                        cover={<img alt="example" width={200} height={100} src={pizza} />}
                     >
                         <Meta title="پیتزا" description="10 هزار تومن" />
-                        <Button className={styles.addButton} type="primary">
-                            +
-                        </Button>
                     </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
+                </div>
+            </div>
+            <div className={styles.foodsLists}>
+                <div className={styles.foodCartWrapper} >
+                    <Card
+                        onClick={() => toSingleFood("ساندویچ")}
+                        hoverable
+                        style={{ width: "100%" }}
+                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
+                    >
+                        <Meta title="ساندویچ" description="10 هزار تومن" />
+                    </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
+                </div>
+                <div className={styles.foodCartWrapper}>
+                    <Card
+                        onClick={() => toSingleFood("پیتزا")}
+                        hoverable
+                        style={{ width: "100%" }}
+                        cover={<img alt="example" width={200} height={100} src={pizza} />}
+                    >
+                        <Meta title="پیتزا" description="10 هزار تومن" />
+                    </Card>
+                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                        +
+                        </Button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default RestaurantMain;
+export default connect("", { onAddBasketCount })(RestaurantMain);
+
