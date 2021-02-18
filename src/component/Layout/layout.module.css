@@ -8,3 +8,19 @@
 .layoutContainer{
     background-color: #fff;
 }
+
+.headerWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:50px;
+    margin:0 20px;
+}
+
+.menuIcon{
+    font-size: 20px;
+}
+
+.basketIcon{
+    font-size: 20px;
+}

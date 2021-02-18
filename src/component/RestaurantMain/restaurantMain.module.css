@@ -1,3 +1,25 @@
+.restaurantCover{
+    background-image: url('../../static/images/resturant-cover.jpg');
+    background-size:contain;
+    width: 100%;
+    height: 300px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.restaurantName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFF;
+    background-color: rgba(255, 255, 255, .2);
+    width: 30%;
+    height: 10%;
+    border-radius:40px;
+}
+
 .sliderContent {
     height: 360px;
     color: #fff;
@@ -26,7 +48,7 @@
 }
 
 .categoryIconContainer {
-    margin-right: 10px;
+    margin-right: 20px;
     background-color: #eee;
     padding: 15px;
     border-radius: 20px;
@@ -41,4 +63,19 @@
 .categoryIcon {
     height: 30px;
     width: 30px;
+}
+
+.foodsLists{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    }
+
+.foodCartWrapper{
+    width: 45%;
+}
+
+.addButton{
+    width: 100%;
+    margin-top: 20px;
 }

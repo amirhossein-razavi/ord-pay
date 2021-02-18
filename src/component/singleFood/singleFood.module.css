@@ -1,0 +1,52 @@
+.foodDescriptionWrapper{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: -20px;
+    background-color: #fff;
+    position: absolute;
+    padding-bottom: 30px;
+    
+}
+
+.foodTitles{
+    margin:20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.foodNameWrapper{
+    display: flex;
+}
+
+.foodName{
+    font-weight: bold;
+}
+
+.foodPrice{
+    margin-right: 20px;
+}
+
+.sliderContent {
+    height: 360px;
+    color: #fff;
+    width: 100%;
+    line-height: 160px;
+    text-align: center;
+    background: #fff
+}
+
+.foodDescription{
+    padding: 20px;
+    padding-top: 0;
+    text-align: justify;
+}
+
+.basketButton{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 10000;
+    height: 50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
