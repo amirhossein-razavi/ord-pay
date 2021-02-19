@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Button } from 'antd';
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
@@ -15,6 +15,7 @@ import pizza from '../../static/images/pizza.png'
 import sandvich from '../../static/images/sandvich.png';
 
 import { onAddBasketCount } from '../../redux/actions/basketActions';
+import { getMenu } from '../../redux/actions/restaurantMenu';
 import { addBasketCount } from '../../globalFunctions/index'
 
 import styles from "./restaurantMain.module.css"
@@ -23,6 +24,14 @@ function RestaurantMain(props) {
 
     const { Meta } = Card;
     const history = useHistory();
+
+    useEffect(() => {
+        props.getMenu();
+    }, [])
+
+    useEffect(() => {
+        console.log(props.menu)
+    }, [props.menu])
 
     const toSingleFood = (prop) => {
         history.push({ pathname: `../../food/${prop}` })
@@ -151,5 +160,9 @@ function RestaurantMain(props) {
     );
 }
 
-export default connect("", { onAddBasketCount })(RestaurantMain);
+const mapStateToProps = (state) => ({
+    menu: state.menu
+});
+
+export default connect(mapStateToProps, { onAddBasketCount, getMenu })(RestaurantMain);
 

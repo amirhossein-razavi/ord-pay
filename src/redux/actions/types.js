@@ -1,1 +1,5 @@
 export const ADD_BASKET_COUNT = "ADD_BASKET_COUNT";
+
+export const GET_MENU = "GET_MENU";
+
+export const ON_NOTIFICATION = "ON_NOTIFICATION";

@@ -1,8 +1,8 @@
 import React from 'react';
-import { API_URL } from '../config';
+import { API_URL } from './url';
 import { LOGOUT_SUCCESS, ON_NOTIFICATION } from '../redux/actions/types';
 
-const SendGRequest = (URL, method, ContentType, Params, dispatch) => {
+const SendRequest = (URL, method, ContentType, Params, dispatch) => {
   let headers = new Headers();
   const token = localStorage.getItem('token');
 
@@ -29,9 +29,8 @@ const SendGRequest = (URL, method, ContentType, Params, dispatch) => {
             type: 'error'
           }
         });
-        dispatch({ type: LOGOUT_SUCCESS });
         setTimeout(() => {
-          window.location.pathname = "/user/login"
+          window.location.pathname = "/"
         }, 3000);
         reject({ "messages": "" })
       }
@@ -85,4 +84,4 @@ const SendGRequest = (URL, method, ContentType, Params, dispatch) => {
 
 }
 
-export default (SendGRequest)
+export default (SendRequest)
