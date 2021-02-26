@@ -1,15 +1,15 @@
 .foodDescriptionWrapper{
+    padding:20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     margin-top: -20px;
     background-color: #fff;
     position: absolute;
     padding-bottom: 30px;
-    
+    width: 100%;
 }
 
 .foodTitles{
-    margin:20px;
     display: flex;
     justify-content: space-between;
 }
@@ -36,7 +36,6 @@
 }
 
 .foodDescription{
-    padding: 20px;
     padding-top: 0;
     text-align: justify;
 }
@@ -49,4 +48,14 @@
     height: 50px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.ingredientsTitle{
+    font-size: 20px !important; 
+    margin-top: 20px;
+}
+
+.ingredientsItem{
+    display: flex;
+    justify-content: space-between;
 }

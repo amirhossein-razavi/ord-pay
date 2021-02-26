@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'antd';
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
@@ -20,25 +20,30 @@ import { addBasketCount } from '../../globalFunctions/index'
 
 import styles from "./restaurantMain.module.css"
 
-function RestaurantMain(props) {
+function RestaurantMain({ menu, getMenu, onAddBasketCount, ...props }) {
+
+    const [selectedCategory, setSelectedCategory] = useState([]);
 
     const { Meta } = Card;
     const history = useHistory();
 
     useEffect(() => {
-        props.getMenu();
+        console.log(props)
+        getMenu();
     }, [])
 
     useEffect(() => {
-        console.log(props.menu)
-    }, [props.menu])
+        console.log(menu)
+        console.log(menu.result && menu.result.items[0].menuItems)
+        menu.result && setSelectedCategory(menu.result.items[0].menuItems)
+    }, [menu])
 
-    const toSingleFood = (prop) => {
-        history.push({ pathname: `../../food/${prop}` })
+    const toSingleFood = (item) => {
+        history.push({ pathname: `../../food/${item.name}`, item })
     }
 
     const toAddBasketCount = () => {
-        props.onAddBasketCount();
+        onAddBasketCount();
         addBasketCount();
     }
 
@@ -50,118 +55,42 @@ function RestaurantMain(props) {
                 </p>
             </div>
             <div className={styles.categoryWrapper}>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category1} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category2} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category3} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category4} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category5} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category6} />
-                </div>
-                <div className={styles.categoryIconContainer}>
-                    <img className={styles.categoryIcon} src={category7} />
-                </div>
+                {menu.result && menu.result.items.map((item) => {
+                    return (
+                        <div className={styles.categoryIconContainerWrapper} onClick={() => setSelectedCategory(item.menuItems)}>
+                            <div className={styles.categoryIconContainer}>
+                                <img className={styles.categoryIcon} src={category2} />
+                            </div>
+                            <p>{item.name}</p>
+                        </div>
+                    )
+                })}
             </div>
             <div className={styles.foodsLists}>
-                <div className={styles.foodCartWrapper}>
-                    <Card
-                        onClick={() => toSingleFood("پیتزا")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={pizza} />}
-                    >
-                        <Meta style={{ width: "100%" }} title="پیتزا" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
+                {selectedCategory.length && selectedCategory.map((item) => {
+                    return (
+                        <div className={styles.foodCartWrapper}>
+                            <Card
+                                onClick={() => toSingleFood(item)}
+                                hoverable
+                                style={{ width: "100%" }}
+                                cover={<img alt="example" width={200} height={100} src={pizza} />}
+                            >
+                                <Meta style={{ width: "100%" }} title={item.name} description={item.price} />
+                            </Card>
+                            <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
+                                +
                         </Button>
-                </div>
-                <div className={styles.foodCartWrapper}>
-                    <Card
-                        onClick={() => toSingleFood("ساندویچ")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
-                    >
-                        <Meta title="ساندویچ" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
-                        </Button>
-                </div>
-            </div>
-            <div className={styles.foodsLists}>
-                <div className={styles.foodCartWrapper} >
-                    <Card
-                        onClick={() => toSingleFood("ساندویچ")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
-                    >
-                        <Meta title="ساندویچ" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
-                        </Button>
-                </div>
-                <div className={styles.foodCartWrapper}>
-                    <Card
-                        onClick={() => toSingleFood("پیتزا")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={pizza} />}
-                    >
-                        <Meta title="پیتزا" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
-                        </Button>
-                </div>
-            </div>
-            <div className={styles.foodsLists}>
-                <div className={styles.foodCartWrapper} >
-                    <Card
-                        onClick={() => toSingleFood("ساندویچ")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={sandvich} />}
-                    >
-                        <Meta title="ساندویچ" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
-                        </Button>
-                </div>
-                <div className={styles.foodCartWrapper}>
-                    <Card
-                        onClick={() => toSingleFood("پیتزا")}
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" width={200} height={100} src={pizza} />}
-                    >
-                        <Meta title="پیتزا" description="10 هزار تومن" />
-                    </Card>
-                    <Button className={styles.addButton} type="primary" onClick={toAddBasketCount}>
-                        +
-                        </Button>
-                </div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );
 }
 
 const mapStateToProps = (state) => ({
-    menu: state.menu
+    menu: state.menu.menu
 });
 
 export default connect(mapStateToProps, { onAddBasketCount, getMenu })(RestaurantMain);

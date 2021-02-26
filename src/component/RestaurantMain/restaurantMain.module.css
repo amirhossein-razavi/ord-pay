@@ -34,7 +34,7 @@
     /* padding: 0 20px; */
     margin-top: 20px;
     overflow-x: scroll;
-    height: 60px;
+    height: 110px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -49,7 +49,6 @@
 }
 
 .categoryIconContainer {
-    margin-right: 20px;
     background-color: #eee;
     padding: 15px;
     border-radius: 20px;
@@ -66,18 +65,23 @@
     width: 30px;
 }
 
-.foodsLists{
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-around;
-    }
-
 .foodCartWrapper{
     width: 45%;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 30px;
 }
 
 .addButton{
     width: 100%;
     margin-top: 20px;
     margin:0
+}
+
+.categoryIconContainerWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
 }
