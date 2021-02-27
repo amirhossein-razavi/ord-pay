@@ -1,0 +1,75 @@
+.billWrapper {
+    padding: 10px;
+}
+
+.billTitle {
+    font-size: 20px;
+}
+
+.foodCart {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    color: #52c41a;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.countWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addButton {
+    background-color: #389e0d;
+    border:#389e0d;
+}
+
+.addButton:focus {
+    background-color: #389e0d;
+    border:#389e0d;
+}
+
+.addButton:hover {
+    background-color: #389e0d;
+    border:#389e0d;
+}
+
+.decreaseButton {
+    background-color: #fff;
+    border: 1px solid#389e0d;
+    color: #389e0d;
+}
+
+.decreaseButton:focus {
+    color: #389e0d;
+    background-color: #fff;
+    border: 1px solid#389e0d;
+}
+
+.decreaseButton:hover {
+    color: #389e0d;
+    background-color: #fff;
+    border: 1px solid#389e0d;
+}
+
+.payButton{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 10000;
+    height: 50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    left:0;
+}

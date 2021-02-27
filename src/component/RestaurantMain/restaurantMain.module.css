@@ -1,6 +1,6 @@
-.restaurantCover{
+.restaurantCover {
     background-image: url('../../static/images/resturant-cover.jpg');
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: 300px;
@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-.restaurantName{
+.restaurantName {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@
     background-color: rgba(255, 255, 255, .2);
     width: 30%;
     height: 10%;
-    border-radius:40px;
+    border-radius: 40px;
 }
 
 .sliderContent {
@@ -40,8 +40,9 @@
     align-items: center;
     background-color: #fff;
 }
-.categoryWrapper .categoryIconContainer:nth-child(1){
-/* margin-right: 150px; */
+
+.categoryWrapper .categoryIconContainer:nth-child(1) {
+    /* margin-right: 150px; */
 }
 
 .categoryWrapper::-webkit-scrollbar {
@@ -65,23 +66,30 @@
     width: 30px;
 }
 
-.foodCartWrapper{
+.foodCartWrapper {
     width: 45%;
     display: inline-block;
     margin-right: 10px;
     margin-top: 30px;
 }
 
-.addButton{
+.addButton {
     width: 100%;
     margin-top: 20px;
-    margin:0
+    margin: 0
 }
 
-.categoryIconContainerWrapper{
+.categoryIconContainerWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0 10px;
+}
+
+.foodsImage {
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center
 }

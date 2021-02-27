@@ -44,10 +44,11 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    z-index: 10000;
+    z-index: 9;
     height: 50px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    left:0;
 }
 
 .ingredientsTitle{

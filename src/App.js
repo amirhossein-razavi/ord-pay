@@ -13,16 +13,25 @@ import Home from './component/Home';
 import AboutUs from './component/AboutUs';
 import RestaurantMain from './component/RestaurantMain';
 import SingleFood from './component/singleFood';
+import Bill from './component/Bill';
 
 function App() {
 
   useEffect(() => {
     checkBasketCount()
+    test()
   })
 
+
+  const test = async () => {
+    const data = JSON.parse(localStorage.getItem('basket'))
+    console.log(await getItem('basket'))
+  }
+
+
   const checkBasketCount = async () => {
-    const basketCount = await getItem("basketCount");
-    !basketCount && setItem("basketCount", 0)
+    const basket = await getItem("basket");
+    !basket && setItem("basket", [])
   }
 
   return (
@@ -50,6 +59,11 @@ function App() {
               layout={TopHeader}
               path="/food/:food"
               component={SingleFood}
+            />
+            <RouteWithLayout
+              layout={TopHeader}
+              path="/bill"
+              component={Bill}
             />
             <RouteWithLayout component={Page404} layout={TopHeader} />
           </Switch>

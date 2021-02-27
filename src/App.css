@@ -8,14 +8,31 @@ body {
   font-family: 'IRANSansWeb';
   margin: 0;
 }
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  }
-  
-  #root {
-    background-color: #ddd;
-  }
 
-  .slick-dots-bottom{
-    bottom: 20px !important;
-  }
+p {
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  background-color: #ddd;
+}
+
+.slick-dots-bottom {
+  bottom: 20px !important;
+}
+
+.billDrawer .ant-drawer-body {
+  padding: 0;
+}
+
+.billDrawer .ant-drawer-content-wrapper {
+  width: 80% !important;
+}
+
+.billDrawer .ant-drawer-footer {
+  padding: 0;
+}

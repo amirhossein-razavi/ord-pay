@@ -1,7 +1,12 @@
 import {
-  ADD_BASKET_COUNT,
+  ADD_BASKET,
+  DECREASE_BASKET,
 } from './types';
 
-export const onAddBasketCount = (prop) => async (dispatch) => {
-  dispatch({ type: ADD_BASKET_COUNT, payload: {} });
+export const onAddBasket = (prop) => async (dispatch) => {
+  dispatch({ type: ADD_BASKET, payload: { prop } });
+};
+
+export const onDecreaseBasket = (prop) => async (dispatch) => {
+  dispatch({ type: DECREASE_BASKET, payload: { prop } });
 };
