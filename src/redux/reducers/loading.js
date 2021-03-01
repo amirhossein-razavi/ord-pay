@@ -1,19 +1,17 @@
 import {
-  GET_MENU,
+  ON_LOADING
 } from '../actions/types';
 
 const initialState = {
-  menu: {},
+  loading: false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_MENU: {
-      const menu = action.payload;
-      console.log(menu)
+
+    case ON_LOADING: {
       return {
-        ...state,
-        menu
+        loading: action.payload
       }
     }
     default:

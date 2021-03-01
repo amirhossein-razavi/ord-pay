@@ -4,6 +4,10 @@
   src: local('IRANSansWeb'), url('./static/fonts/iransans/woff/IRANSansWeb.woff') format('woff');
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'IRANSansWeb';
   margin: 0;
@@ -35,4 +39,17 @@ code {
 
 .billDrawer .ant-drawer-footer {
   padding: 0;
+}
+
+.resturantFoods .ant-card-body{
+  padding: 20px 10px;
+}
+
+.resturantFoods .ant-card-meta-detail{
+  display: flex;
+  justify-content: space-between;
+}
+
+.resturantFoods .ant-card-meta-title{
+  margin-bottom: 0;
 }

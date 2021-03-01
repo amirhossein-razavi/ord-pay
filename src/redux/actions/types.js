@@ -4,3 +4,5 @@ export const DECREASE_BASKET = "DECREASE_BASKET";
 export const GET_MENU = "GET_MENU";
 
 export const ON_NOTIFICATION = "ON_NOTIFICATION";
+
+export const ON_LOADING = "ON_LOADING";

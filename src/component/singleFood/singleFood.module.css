@@ -52,11 +52,14 @@
 }
 
 .ingredientsTitle{
-    font-size: 20px !important; 
+    font-size: 18px !important; 
+    font-weight: bold;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .ingredientsItem{
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
 }

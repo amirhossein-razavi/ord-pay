@@ -15,6 +15,7 @@ export default function (state = initialState, action) {
       const data = action.payload.prop;
 
       const newBasket = state.basket;
+      console.log(newBasket)
 
       const exitFood = newBasket.findIndex((i) => i.id == data.id);
       if (exitFood !== -1) {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
         data.count = 1
         newBasket.unshift(data);
       }
+
 
       setItem("basket", JSON.stringify(newBasket))
 
@@ -43,6 +45,7 @@ export default function (state = initialState, action) {
       if (newBasket[exitFood].count > 1) {
         newBasket[exitFood].count -= 1
       } else {
+        newBasket[exitFood].count -= 1
         newBasket = newBasket.filter(i => i.id !== data.id)
       }
 

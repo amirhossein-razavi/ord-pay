@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Badge, Drawer } from 'antd'
-import { ShoppingOutlined, MenuOutlined } from '@ant-design/icons';
+import { ShoppingOutlined, MenuOutlined, RightOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
-import { tree_digit_number } from '../../globalFunctions/index'
 
 import Bill from '../Bill'
 
@@ -27,13 +25,18 @@ function Header({ basket, ...props }) {
                 return accumulator + currentValue.count
             }, initialValue)
             setBasketCount(sum)
+        } else {
+            setBasketCount(0)
         }
+
         if (basket.basket.length) {
             let initialValue = 0
             let sum = basket.basket.reduce(function (accumulator, currentValue) {
                 return accumulator + (currentValue.price * currentValue.count)
             }, initialValue)
             setBasketTotalPrice(sum)
+        } else {
+            setBasketTotalPrice(0)
         }
     }, [basket])
 
@@ -41,12 +44,21 @@ function Header({ basket, ...props }) {
         <div className={styles.mainContainer}>
             <Layout className={styles.layoutContainer}>
                 <div className={styles.headerWrapper}>
-                    <MenuOutlined className={styles.menuIcon} onClick={() => setOpenDrawer(true)} />
+                    {props.computedMatch.params.food ?
+                        <div className={styles.backWrapper} onClick={() => history.goBack()}>
+                            <RightOutlined />
+                            <p className={styles.backText}>
+                                برگشت
+                            </p>
+                        </div>
+                        :
+                        <MenuOutlined className={styles.menuIcon} onClick={() => setOpenDrawer(true)} />
+                    }
                     <Badge onClick={() => setOpenBillDrawer(true)} count={basketCount}>
                         <ShoppingOutlined className={styles.basketIcon} />
                     </Badge>
                 </div>
-                <Content>
+                <Content className={styles.antContent}>
                     {props.children}
                 </Content>
             </Layout >
@@ -61,7 +73,7 @@ function Header({ basket, ...props }) {
                 <p>تست</p>
             </Drawer>
             <Drawer
-                title="لیست صورتحساب"
+                title="لیست سفارشات"
                 placement={'left'}
                 onClose={() => setOpenBillDrawer(false)}
                 visible={openBillDrawer}
@@ -72,7 +84,7 @@ function Header({ basket, ...props }) {
                             مبلغ کل :
                         </p>
                         <p className={styles.totalPrice}>
-                            {tree_digit_number(basketTotalPrice)} هزار ریال
+                            {parseFloat(basketTotalPrice) / 10000}   هزار تومان
                         </p>
                     </div>
                 }

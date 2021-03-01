@@ -28,7 +28,7 @@ function Bill({ basket, onAddBasket, onDecreaseBasket, ...props }) {
                             </Col>
                             <Col onClick={() => toSingleFood(item)} span={10}>
                                 <p className={styles.price}>
-                                    {tree_digit_number(item.price)} هزار ریال
+                                    {parseFloat(item.price) / 10000}   هزار تومان
                                 </p>
                                 <p className={styles.name}>
                                     {item.name}

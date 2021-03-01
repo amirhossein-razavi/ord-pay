@@ -13,7 +13,7 @@ function Home() {
         <div style={{ padding: 50 }}>
             {/* <FontAwesomeIcon icon="fas fa-coffee" /> */}
             <Card
-                onClick={() => history.push({ pathname: '/menu/barli' })}
+                onClick={() => history.push({ pathname: 'shop/barli' })}
                 hoverable
                 style={{ width: "100%" }}
                 cover={<img src={barliImage} />}
