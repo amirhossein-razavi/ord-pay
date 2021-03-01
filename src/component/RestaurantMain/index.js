@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Badge ,Space} from 'antd';
+import { Card, Button, Badge, Space } from 'antd';
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
 
@@ -47,7 +47,21 @@ function RestaurantMain({ menu, basket, getMenu, onAddBasket, ...props }) {
                     رستوران {props.computedMatch.params.restaurantName}
                 </p>
             </div>
-            <div className={[styles.categoryWrapper, scrollDown && styles.categoryWrapperOnScroll].join(" ")}>
+            <div className={styles.categoryWrapper}>
+                {menu.menu.result && menu.menu.result.items.map((item, index) => {
+                    return (
+                        <a href={`#${index}`}>
+                            <div className={styles.categoryIconContainerWrapper} onClick={() => setSelectedCategory(item.menuItems)}>
+                                <div className={styles.categoryIconContainer}>
+                                    <img className={styles.categoryIcon} src={category2} />
+                                </div>
+                                <p className={styles.categoryName} >{item.name}</p>
+                            </div>
+                        </a>
+                    )
+                })}
+            </div>
+            <div className={[styles.categoryWrapper, scrollDown ? styles.categoryWrapperOnScroll : styles.categoryWrapperOnScroll2].join(" ")}>
                 {menu.menu.result && menu.menu.result.items.map((item, index) => {
                     return (
                         <a href={`#${index}`}>

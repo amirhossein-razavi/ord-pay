@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { onAddBasket } from '../../redux/actions/basketActions';
 import { IMAGE_URL } from '../../globalFunctions/url'
-import { tree_digit_number } from '../../globalFunctions/index'
 
 import styles from "./singleFood.module.css"
 
