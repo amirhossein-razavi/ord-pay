@@ -1,0 +1,15 @@
+.shopCard{
+    margin-top: 20px;
+}
+
+.shopImage {
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center
+}
+
+.shopNonImage {
+    height: 200px !important;
+    width: 100% !important;
+}

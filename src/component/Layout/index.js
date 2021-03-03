@@ -8,7 +8,7 @@ import Bill from '../Bill'
 
 import styles from "./layout.module.css"
 
-function Header({ basket, ...props }) {
+function Header({ basket, menu, ...props }) {
 
     const { Content } = Layout;
     const history = useHistory();
@@ -19,9 +19,10 @@ function Header({ basket, ...props }) {
     const [openBillDrawer, setOpenBillDrawer] = useState(false);
 
     useEffect(() => {
-        if (basket.basket.length) {
+        if (Object.keys(basket.basket).length && (menu.shop.result && menu.shop.result.uniqueName === props.computedMatch.params.restaurantName)) {
+            console.log(basket.basket)
             let initialValue = 0
-            let sum = basket.basket.reduce(function (accumulator, currentValue) {
+            let sum = basket.basket[menu.shop.result.uniqueName].reduce(function (accumulator, currentValue) {
                 return accumulator + currentValue.count
             }, initialValue)
             setBasketCount(sum)
@@ -29,16 +30,20 @@ function Header({ basket, ...props }) {
             setBasketCount(0)
         }
 
-        if (basket.basket.length) {
+        if (Object.keys(basket.basket).length && menu.shop.result) {
             let initialValue = 0
-            let sum = basket.basket.reduce(function (accumulator, currentValue) {
+            let sum = basket.basket[menu.shop.result.uniqueName].reduce(function (accumulator, currentValue) {
                 return accumulator + (currentValue.price * currentValue.count)
             }, initialValue)
             setBasketTotalPrice(sum)
         } else {
             setBasketTotalPrice(0)
         }
-    }, [basket])
+    }, [basket, menu])
+
+    useEffect(() => {
+        console.log(props)
+    }, [])
 
     return (
         <div className={styles.mainContainer}>
@@ -54,9 +59,9 @@ function Header({ basket, ...props }) {
                         :
                         <MenuOutlined className={styles.menuIcon} onClick={() => setOpenDrawer(true)} />
                     }
-                    <Badge onClick={() => setOpenBillDrawer(true)} count={basketCount}>
+                    {props.location.pathname !== "/" && <Badge onClick={() => setOpenBillDrawer(true)} count={basketCount}>
                         <ShoppingOutlined className={styles.basketIcon} />
-                    </Badge>
+                    </Badge>}
                 </div>
                 <Content className={styles.antContent}>
                     {props.children}
@@ -96,7 +101,8 @@ function Header({ basket, ...props }) {
 }
 
 const mapStateToProps = (state) => ({
-    basket: state.basket
+    basket: state.basket,
+    menu: state.menu,
 });
 
 export default connect(mapStateToProps, {})(Header);

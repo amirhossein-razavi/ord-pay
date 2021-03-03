@@ -5,17 +5,19 @@ import {
 import { setItem } from '../../globalFunctions/asyncLocalStorage';
 
 const initialState = {
-  basket: localStorage.getItem('basket') && JSON.parse(localStorage.getItem('basket')) || [],
+  basket: localStorage.getItem('basket') && JSON.parse(localStorage.getItem('basket')) || {},
 };
+
 
 export default function (state = initialState, action) {
   switch (action.type) {
 
     case ADD_BASKET: {
       const data = action.payload.prop;
+      const localBasket = action.payload.localBasket;
+      const shopData = action.payload.shopData;
 
-      const newBasket = state.basket;
-      console.log(newBasket)
+      const newBasket = Object.keys(state.basket).length ? state.basket[shopData.result.uniqueName] : []
 
       const exitFood = newBasket.findIndex((i) => i.id == data.id);
       if (exitFood !== -1) {
@@ -27,19 +29,27 @@ export default function (state = initialState, action) {
         newBasket.unshift(data);
       }
 
-
-      setItem("basket", JSON.stringify(newBasket))
+      const localData = {
+        ...localBasket,
+        [shopData.result.uniqueName]: newBasket
+      }
+      setItem("basket", JSON.stringify(localData))
 
       return {
         ...state,
-        basket: newBasket
+        basket: {
+          ...state.basket,
+          [shopData.result.uniqueName]: newBasket
+        }
       }
     }
 
     case DECREASE_BASKET: {
       const data = action.payload.prop;
+      const localBasket = action.payload.localBasket;
+      const shopData = action.payload.shopData;
 
-      var newBasket = state.basket;
+      var newBasket = state.basket[shopData.result.uniqueName];
 
       const exitFood = newBasket.findIndex((i) => i.id == data.id);
       if (newBasket[exitFood].count > 1) {
@@ -49,11 +59,19 @@ export default function (state = initialState, action) {
         newBasket = newBasket.filter(i => i.id !== data.id)
       }
 
-      setItem("basket", JSON.stringify(newBasket))
+      const localData = {
+        ...localBasket,
+        [shopData.result.uniqueName]: newBasket
+      }
+
+      setItem("basket", JSON.stringify(localData))
 
       return {
         ...state,
-        basket: newBasket
+        basket: {
+          ...state.basket,
+          [shopData.result.uniqueName]: newBasket
+        }
       }
     }
     default:

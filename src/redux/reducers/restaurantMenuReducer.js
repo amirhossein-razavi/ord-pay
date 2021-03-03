@@ -1,14 +1,25 @@
 import {
   GET_MENU,
-  ADD_BASKET
+  GET_SHOP_DETAILS,
+  ADD_BASKET,
 } from '../actions/types';
 
 const initialState = {
+  shop: {},
   menu: {},
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_SHOP_DETAILS: {
+
+      var shop = action.payload;
+
+      return {
+        ...state,
+        shop
+      }
+    }
     case GET_MENU: {
 
       var menu = action.payload;

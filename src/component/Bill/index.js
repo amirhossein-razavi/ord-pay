@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
 import { IMAGE_URL } from '../../globalFunctions/url'
-import { tree_digit_number } from '../../globalFunctions/index'
 import { onAddBasket, onDecreaseBasket } from '../../redux/actions/basketActions';
 
 import styles from "./bill.module.css"
 
-function Bill({ basket, onAddBasket, onDecreaseBasket, ...props }) {
+function Bill({ basket, menu, onAddBasket, onDecreaseBasket, ...props }) {
     const history = useHistory();
 
     const toSingleFood = (item) => {
@@ -17,10 +16,14 @@ function Bill({ basket, onAddBasket, onDecreaseBasket, ...props }) {
         props.drawer(false)
     }
 
+    useEffect(() => {
+        console.log(basket.basket)
+    }, [basket])
+
     return (
         <div className={styles.billWrapper}>
             <div className={styles.foodsLists}>
-                {basket.basket.length !== 0 && basket.basket.map((item) => {
+                {(Object.keys(basket.basket).length && menu.shop.result) && basket.basket[menu.shop.result.uniqueName].map((item) => {
                     return (
                         <Row className={styles.foodCart}>
                             <Col onClick={() => toSingleFood(item)} span={4}>
@@ -57,7 +60,8 @@ function Bill({ basket, onAddBasket, onDecreaseBasket, ...props }) {
 }
 
 const mapStateToProps = (state) => ({
-    basket: state.basket
+    basket: state.basket,
+    menu: state.menu
 });
 
 export default connect(mapStateToProps, { onAddBasket, onDecreaseBasket })(Bill);

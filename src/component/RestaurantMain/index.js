@@ -6,27 +6,33 @@ import { connect } from 'react-redux';
 import category2 from '../../static/images/category2.svg'
 
 import { onAddBasket } from '../../redux/actions/basketActions';
-import { getMenu } from '../../redux/actions/restaurantMenu';
+import { getShopDetails, getMenu } from '../../redux/actions/restaurantMenu';
 import { IMAGE_URL } from '../../globalFunctions/url'
 
 import styles from "./restaurantMain.module.css"
 
-function RestaurantMain({ menu, basket, getMenu, onAddBasket, ...props }) {
+function RestaurantMain({ menu, basket, getShopDetails, getMenu, onAddBasket, ...props }) {
 
-    const [selectedCategory, setSelectedCategory] = useState([]);
     const [scrollDown, setScrollDown] = useState(false);
 
     const { Meta } = Card;
     const history = useHistory();
 
     useEffect(() => {
-        getMenu();
+        getShopMenu()
         window.addEventListener('scroll', listenScrollEvent)
     }, [])
 
-    useEffect(() => {
-        menu.menu.result && setSelectedCategory(menu.menu.result.items[0].menuItems)
-    }, [menu])
+    const getShopMenu = async () => {
+        const result = await getShopDetails(props.computedMatch.params.restaurantName);
+        console.log(result)
+        setTimeout(() => {
+            if (result.success) {
+                getMenu(result.result.id);
+            }
+            
+        }, 2000);
+    }
 
     const listenScrollEvent = e => {
         if (window.scrollY > 375) {
@@ -51,7 +57,7 @@ function RestaurantMain({ menu, basket, getMenu, onAddBasket, ...props }) {
                 {menu.menu.result && menu.menu.result.items.map((item, index) => {
                     return (
                         <a href={`#${index}`}>
-                            <div className={styles.categoryIconContainerWrapper} onClick={() => setSelectedCategory(item.menuItems)}>
+                            <div className={styles.categoryIconContainerWrapper}>
                                 <div className={styles.categoryIconContainer}>
                                     <img className={styles.categoryIcon} src={category2} />
                                 </div>
@@ -65,7 +71,7 @@ function RestaurantMain({ menu, basket, getMenu, onAddBasket, ...props }) {
                 {menu.menu.result && menu.menu.result.items.map((item, index) => {
                     return (
                         <a href={`#${index}`}>
-                            <div className={styles.categoryIconContainerWrapper} onClick={() => setSelectedCategory(item.menuItems)}>
+                            <div className={styles.categoryIconContainerWrapper}>
                                 <div className={styles.categoryIconContainer}>
                                     <img className={styles.categoryIcon} src={category2} />
                                 </div>
@@ -84,7 +90,7 @@ function RestaurantMain({ menu, basket, getMenu, onAddBasket, ...props }) {
                                 <p>{item.name}</p>
                             </div>
                             {item.menuItems.length !== 0 && item.menuItems.map((item) => {
-                                const basketItem = basket.basket.filter(i => i.id == item.id)
+                                const basketItem = Object.keys(basket.basket).length && basket.basket[menu.shop.result.uniqueName].filter(i => i.id == item.id)
                                 return (
                                     <div className={styles.foodCartWrapper}>
                                         <Card
@@ -119,4 +125,4 @@ const mapStateToProps = (state) => ({
     basket: state.basket
 });
 
-export default connect(mapStateToProps, { onAddBasket, getMenu })(RestaurantMain);
+export default connect(mapStateToProps, { onAddBasket, getShopDetails, getMenu })(RestaurantMain);
