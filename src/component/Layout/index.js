@@ -19,8 +19,10 @@ function Header({ basket, menu, ...props }) {
     const [openBillDrawer, setOpenBillDrawer] = useState(false);
 
     useEffect(() => {
-        if (Object.keys(basket.basket).length && (menu.shop.result && menu.shop.result.uniqueName === props.computedMatch.params.restaurantName)) {
+        if (Object.keys(basket.basket).length && (menu.shop.result && basket.basket[menu.shop.result.uniqueName])) {
             console.log(basket.basket)
+            console.log(menu.shop.result.uniqueName)
+            console.log(props.computedMatch.params.restaurantName)
             let initialValue = 0
             let sum = basket.basket[menu.shop.result.uniqueName].reduce(function (accumulator, currentValue) {
                 return accumulator + currentValue.count
@@ -30,7 +32,7 @@ function Header({ basket, menu, ...props }) {
             setBasketCount(0)
         }
 
-        if (Object.keys(basket.basket).length && menu.shop.result) {
+        if (Object.keys(basket.basket).length && (menu.shop.result && basket.basket[menu.shop.result.uniqueName])) {
             let initialValue = 0
             let sum = basket.basket[menu.shop.result.uniqueName].reduce(function (accumulator, currentValue) {
                 return accumulator + (currentValue.price * currentValue.count)
@@ -73,9 +75,9 @@ function Header({ basket, menu, ...props }) {
                 onClose={() => setOpenDrawer(false)}
                 visible={openDrawer}
             >
-                <p>تست</p>
-                <p>تست</p>
-                <p>تست</p>
+                <p style={{ cursor: "pointer" }} onClick={() => { history.push({ pathname: '/' }); setOpenDrawer(false) }}>
+                    صفحه اصلی
+                </p>
             </Drawer>
             <Drawer
                 title="لیست سفارشات"
@@ -96,7 +98,7 @@ function Header({ basket, menu, ...props }) {
             >
                 <Bill drawer={setOpenBillDrawer} />
             </Drawer>
-        </div>
+        </div >
     );
 }
 

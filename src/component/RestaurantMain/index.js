@@ -25,13 +25,7 @@ function RestaurantMain({ menu, basket, getShopDetails, getMenu, onAddBasket, ..
 
     const getShopMenu = async () => {
         const result = await getShopDetails(props.computedMatch.params.restaurantName);
-        console.log(result)
-        setTimeout(() => {
-            if (result.success) {
-                getMenu(result.result.id);
-            }
-            
-        }, 2000);
+        if (result.success && result.result) getMenu(result.result.id);
     }
 
     const listenScrollEvent = e => {
@@ -48,7 +42,7 @@ function RestaurantMain({ menu, basket, getShopDetails, getMenu, onAddBasket, ..
 
     return (
         <div className={styles.restaurantMain}>
-            <div className={styles.restaurantCover}>
+            <div style={{ backgroundImage: (menu.shop.result && menu.shop.result.shopImages.length !== 0) && `url(${IMAGE_URL}${menu.shop.result.shopImages[0].path})` }} className={styles.restaurantCover}>
                 <p className={styles.restaurantName}>
                     رستوران {props.computedMatch.params.restaurantName}
                 </p>
@@ -90,7 +84,7 @@ function RestaurantMain({ menu, basket, getShopDetails, getMenu, onAddBasket, ..
                                 <p>{item.name}</p>
                             </div>
                             {item.menuItems.length !== 0 && item.menuItems.map((item) => {
-                                const basketItem = Object.keys(basket.basket).length && basket.basket[menu.shop.result.uniqueName].filter(i => i.id == item.id)
+                                const basketItem = Boolean((Object.keys(basket.basket).length && menu.shop.result) && basket.basket[menu.shop.result.uniqueName]) && basket.basket[menu.shop.result.uniqueName].filter(i => i.id == item.id)
                                 return (
                                     <div className={styles.foodCartWrapper}>
                                         <Card

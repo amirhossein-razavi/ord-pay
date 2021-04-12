@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
       const localBasket = action.payload.localBasket;
       const shopData = action.payload.shopData;
 
-      const newBasket = Object.keys(state.basket).length ? state.basket[shopData.result.uniqueName] : []
+      const newBasket = (Object.keys(state.basket).length && state.basket[shopData.result.uniqueName]) ? state.basket[shopData.result.uniqueName] : []
 
       const exitFood = newBasket.findIndex((i) => i.id == data.id);
       if (exitFood !== -1) {

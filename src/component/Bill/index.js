@@ -23,7 +23,7 @@ function Bill({ basket, menu, onAddBasket, onDecreaseBasket, ...props }) {
     return (
         <div className={styles.billWrapper}>
             <div className={styles.foodsLists}>
-                {(Object.keys(basket.basket).length && menu.shop.result) && basket.basket[menu.shop.result.uniqueName].map((item) => {
+                {(Object.keys(basket.basket).length && (menu.shop.result && basket.basket[menu.shop.result.uniqueName])) && basket.basket[menu.shop.result.uniqueName].map((item) => {
                     return (
                         <Row className={styles.foodCart}>
                             <Col onClick={() => toSingleFood(item)} span={4}>
